@@ -6,6 +6,9 @@ gem 'rails', '3.2.10'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'slim-rails'
+gem 'simple_form'
+gem 'twitter-bootstrap-rails'
 gem 'state_machine'
 gem 'ruby-graphviz', :require => 'graphviz' 
 
