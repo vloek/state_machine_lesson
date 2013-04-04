@@ -29,7 +29,11 @@ class PostsController < ApplicationController
 	def update
 		@post = Post.find(params[:id])
 		if @post.update_attributes(params[:post])
-			@post.publicate if params[:published]
+			if params[:published]
+				@post.publicate 
+			else
+				@post.checking
+			end
 			redirect_to posts_url, notice: 'Updated'
 		else
 			render :edit, notice: 'Error Update!'
