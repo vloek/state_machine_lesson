@@ -2,5 +2,5 @@
 	= f.input :title
 	= f.input :content, as: :text
 	= f.input 'published' do |r|
-		= check_box_tag 'published'
+		= check_box_tag 'published', '1', @post.published?
 	= f.submit "Save", class: 'btn'
