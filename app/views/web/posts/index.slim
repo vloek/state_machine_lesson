@@ -1,0 +1,20 @@
+- if @posts.present?
+	- @posts.each do |post|
+		.row.well style="background: #{publicate_post(post)}"
+			.span6
+				.row
+					.span5 
+						b 
+							= post.title
+							|&nbsp;
+							.pull-right
+								= link_to edit_post_path(post), class: 'btn' do
+									i.icon-pencil
+				.row
+					.span5 
+						p= post.content
+- else
+	h3 Нет сообщений
+.row
+	.span12
+		= link_to "New Post", new_post_path, class: 'btn btn-inverse'

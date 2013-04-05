@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class Web::PostsController < Web::ApplicationController
 	respond_to :html
 
 	def index
@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 	end
 
 	def blog
-		@posts = Post.where(:state => 'published')
+		@posts = Post.publicated
 	end
 
 	def new
@@ -29,15 +29,9 @@ class PostsController < ApplicationController
 	def update
 		@post = Post.find(params[:id])
 		if @post.update_attributes(params[:post])
-			if params[:published]
-				@post.publicate 
-			else
-				@post.checking
-			end
 			redirect_to posts_url, notice: 'Updated'
 		else
 			render :edit, notice: 'Error Update!'
 		end
 	end
-
 end

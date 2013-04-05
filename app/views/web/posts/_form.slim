@@ -1,6 +1,5 @@
 = simple_form_for @post do |f|
 	= f.input :title
 	= f.input :content, as: :text
-	= f.input 'published' do |r|
-		= check_box_tag 'published', '1', @post.published?
+	= f.input :publ, as: :radio_buttons
 	= f.submit "Save", class: 'btn'

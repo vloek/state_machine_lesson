@@ -1,34 +1,41 @@
 class Post < ActiveRecord::Base
-  attr_accessible :content, :title
+  attr_accessible :content, :title, :publ
 
   validates :title, presence: true
-  after_save :check_content
+
+  scope :publicated, where(:state => 'published')
 
   state_machine :initial => :unsuitable_to_publication do
-  	before_transition any => [:published, :ready_to_publication], :do => :check_content
+    # STATES
+    state :ready_to_publication do
+      validates :content, presence: true
+    end
 
+    state :published do 
+      validates :content, presence: true
+    end
+    
   	# EVENTS
   	event :publicate do 
-  		transition [:unsuitable_to_publication, :ready_to_publication] => :published
+  		transition any => :published
   	end
 
-  	event :checking do 
-  		transition [:published, :unsuitable_to_publication] => :ready_to_publication
-  	end
+    event :unpublicate do
+      transition any => :ready_to_publication
+      transition any => :unsuitable_to_publication
+    end
 
-  	event :unpreparedness do 
-  		transition [:published, :ready_to_publication] => :unsuitable_to_publication
-  	end
-
-  	# STATES
-  	state :ready_to_publication
-  	state :published
   end
 
+  def publ
+    self.published?
+  end
 
-  def check_content
-  	if self.content == '' || self.content.nil?
-  		self.unpreparedness
-  	end
+  def publ=(s)
+    if s == true.to_s
+      self.publicate
+    else
+      self.unpublicate if self.publ
+    end
   end
 end
