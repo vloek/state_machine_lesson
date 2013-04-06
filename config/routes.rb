@@ -1,5 +1,8 @@
 StateMachineLesson::Application.routes.draw do
-  resources :posts
+  scope :module => 'web' do 
+    root :to => 'welcome#blog'
+    resources :posts
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -49,7 +52,6 @@ StateMachineLesson::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'posts#blog'
 
   # See how all your routes lay out with "rake routes"
 

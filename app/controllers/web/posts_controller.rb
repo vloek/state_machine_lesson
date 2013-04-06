@@ -5,10 +5,6 @@ class Web::PostsController < Web::ApplicationController
 		@posts = Post.all
 	end
 
-	def blog
-		@posts = Post.publicated
-	end
-
 	def new
 		@post = Post.new
 	end
@@ -28,10 +24,12 @@ class Web::PostsController < Web::ApplicationController
 
 	def update
 		@post = Post.find(params[:id])
+
 		if @post.update_attributes(params[:post])
 			redirect_to posts_url, notice: 'Updated'
 		else
 			render :edit, notice: 'Error Update!'
 		end
 	end
+
 end

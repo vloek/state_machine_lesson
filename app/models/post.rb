@@ -3,10 +3,14 @@ class Post < ActiveRecord::Base
 
   validates :title, presence: true
 
+  # SCOPES
   scope :publicated, where(:state => 'published')
 
+  # Used gem state_machine
   state_machine :initial => :unsuitable_to_publication do
     # STATES
+    state :unsuitable_to_publication
+
     state :ready_to_publication do
       validates :content, presence: true
     end
@@ -22,7 +26,6 @@ class Post < ActiveRecord::Base
 
     event :unpublicate do
       transition any => :ready_to_publication
-      transition any => :unsuitable_to_publication
     end
 
   end
@@ -31,8 +34,8 @@ class Post < ActiveRecord::Base
     self.published?
   end
 
-  def publ=(s)
-    if s == true.to_s
+  def publ=(x)
+    if x == true.to_s
       self.publicate
     else
       self.unpublicate if self.publ

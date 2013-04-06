@@ -1,17 +1,23 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.10'
+gem 'rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
 gem 'slim-rails'
+gem 'cells'
+gem 'shoulda-matchers'
+gem 'draper'
 gem 'simple_form'
 gem 'twitter-bootstrap-rails'
 gem 'state_machine'
 gem 'ruby-graphviz', :require => 'graphviz' 
 
+group :test do 
+	gem 'rspec-rails'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.

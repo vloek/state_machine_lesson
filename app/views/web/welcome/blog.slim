@@ -1,0 +1,14 @@
+- if @posts.present?
+	- @posts.each do |post|
+		.row.well
+			.span6
+				.row
+					.span5 
+						b 
+							= post.title
+							
+				.row
+					.span5 
+						p= post.content
+- else
+	h3 Нет сообщений
